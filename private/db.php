@@ -48,11 +48,14 @@ function getUserByUsernameOrEmail(string $identifier): ?array
     global $pdo;
 
     $sql = "SELECT * FROM users
-            WHERE username = :id OR email = :id
+            WHERE username = :username OR email = :email
             LIMIT 1";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([':id' => $identifier]);
+    $stmt->execute([
+        ':username' => $identifier,
+        ':email'    => $identifier,
+    ]);
 
     $user = $stmt->fetch();
     return $user ?: null;
