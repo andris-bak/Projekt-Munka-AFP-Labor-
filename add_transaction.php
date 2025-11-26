@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/private/auth.php';
 require_once __DIR__ . '/private/db.php';
+require_once __DIR__ . '/private/ai.php';
 
 requireLogin();
 
@@ -43,6 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Itt később jöhet majd az AI kategorizálás:
                 // ha $categoryValue === null, akkor meghívunk egy AI függvényt,
                 // pl. $categoryValue = aiCategorizeDescription($description);
+                // 🔹 AI (jelenleg kulcsszavas) kategorizálás, ha nincs megadva kategória
+                if ($categoryValue === null) {
+                    $categoryValue = categorizeDescription($description);
+                }
 
                 $ok = createTransaction(
                     $user['id'],

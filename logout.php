@@ -1,17 +1,8 @@
 <?php
+require_once __DIR__ . '/private/auth.php';
 
+logoutUser();
 
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+// sikeres kijelentkezés után irány a login oldal
+header('Location: login.php');
+exit;
